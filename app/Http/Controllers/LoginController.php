@@ -29,7 +29,10 @@ class LoginController extends Controller
      */
     public function login()
     {
-        return view('contenedor/login/iniciar_sesion');
+        $arrayParametros = array(
+            'error' => 'no'
+            );
+        return view('contenedor/login/iniciar_sesion',$arrayParametros);
     }
     public function iniciar_sesion(Request $request)
     {
@@ -38,9 +41,15 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            return view('contenedor/admin/inicioAdmin');
+            $arrayParametros = array(
+                'error' => 'no'
+                );
+            return view('contenedor/admin/inicioAdmin',$arrayParametros);
         }else{
-            return view('contenedor/login/iniciar_sesion'); 
+            $arrayParametros = array(
+                'error' => 'si'
+                );
+            return view('contenedor/login/iniciar_sesion',$arrayParametros); 
         }
     }
 }
