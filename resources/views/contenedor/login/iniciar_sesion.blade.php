@@ -159,13 +159,11 @@ body {
               <?php }  ?>
               @csrf
               <div class="form-label-group">
-                <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
-                
+                <input placeholder="Email address" type="email" id="email" name="email" class="form-control"  required autofocus>
               </div>
 
               <div class="form-label-group">
                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-               
               </div>
 
               <div class="custom-control custom-checkbox mb-3">

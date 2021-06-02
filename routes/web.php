@@ -5,7 +5,8 @@ use App\Http\Controllers\VisitaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LogOutController;
-
+use App\Http\Controllers\ProformaController;
+use App\Http\Controllers\ProductoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +33,11 @@ Route::post("/cerrar_sesion", [LogOutController::class, "cerrar_sesion"])->name(
 
 Route::get("/inicioAdmin_index", [AdminController::class, "inicioAdmin_index"])->name('inicioAdmin_index');
 Route::get("/inventario_index", [AdminController::class, "inventario_index"])->name('inventario_index');
-Route::get("/proforma_index", [AdminController::class, "proforma_index"])->name('proforma_index');
-Route::get("/config_index", [AdminController::class, "config_index"])->name('config_index');
+Route::get("/producto_index", [ProductoController::class, "producto_index"])->name('producto_index');
 Route::get("/usuarios_index", [AdminController::class, "usuarios_index"])->name('usuarios_index');
 
+Route::get("/pdfproforma", [ProformaController::class, "pdfproforma"])->name('pdfproforma');
+Route::get("/proforma_index", [ProformaController::class, "proforma_index"])->name('proforma_index');
+Route::post("/guardar_proforma", [ProformaController::class, "guardar_proforma"])->name('guardar_proforma');
+Route::post("/producto_busqueda", [ProformaController::class, "producto_busqueda"])->name('producto_busqueda');
+Route::post("/cliente_busqueda", [ProformaController::class, "cliente_busqueda"])->name('cliente_busqueda');

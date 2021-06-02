@@ -29,14 +29,6 @@ class AdminController extends Controller
     {
         return view('contenedor/admin/inventario');
     }
-    public function proforma_index()
-    {
-        return view('contenedor/admin/proforma');
-    }
-    public function config_index()
-    {
-        return view('contenedor/admin/config');
-    }
     public function usuarios_index()
     {
         return view('contenedor/admin/usuarios');

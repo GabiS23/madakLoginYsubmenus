@@ -22,107 +22,10 @@
 		{{ csrf_field() }}
 		<div class="row  justify-content-center">
             <div class="col-md-1"></div>
-            <!-- inicio form cliente -->
-			<div class="col-sm-3">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12" style="padding-right:10px; border-right: 1px solid #D10024;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row-fluid"> 
-                                    <div class="span6 pull-left"> 
-                                        <h3>Datos del cliente</h3> 
-                                    </div> 
-                                    <div class="span6 pull-right"> 
-                                        <a href="javascript:;" onclick="guardar();" class="d-none btn btn-sm btn-primary shadow-sm"><i class="fas fa-save"></i> Generar proforma</a>
-                                        <a href="javascript:;"  onclick ="document.getElementById('form1').reset();" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-eraser"></i> Limpiar</a>
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-						<div class="form-group">
-							<label for="">CI:</label>
-							<input type="text"  class="form-control" id="ci" name="ci" required autocomplete="off" >
-							<div id="countryList"></div>
-						</div>
-						<div class="form-group">
-							<label for="">Cliente:</label>
-							<input type="text" class="form-control" id="nombre_completo" name="nombre_completo" required>
-						</div>
-						<div class="form-group">
-							<label for="">Telefono/Celular:</label>
-							<input type="text" class="form-control" id="celular_telefono" name="celular_telefono">
-						</div>
-						<div class="form-group">
-							<label for="">Direccion:</label>
-							<textarea type="text" class="form-control" id="direccion_cliente" name="direccion_cliente" > </textarea> 
-						</div>
-                        <div class="table-responsive">
-                            <table class="table table-hover" id="clientes" name="clientes">
-                                <thead>
-                                    <tr>
-                                        <th hidden="hide" >Id detalle_proforma</th>
-                                        <th>Cliente</th>
-                                        <th>Fecha</th>
-                                        <th>Nro</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($ultimos_clientes as $p)
-                                    <tr>
-                                        <td hidden="hide">{{$p->id_detalle_proforma}}</td>
-                                        <td>{{$p->nombre_completo}}</td>
-                                        <td>{{$p->fecha}}</td>
-                                        <th>{{$p->nro_proforma}}</th>
-                                        <td>  
-                                        <!-- dropdown -->
-                                            <ul>    
-                                                <li class="dropdown">
-                                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-print fa-sm"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu" style="background:white;">
-                                                        <li><a href="{!! route('pdfproforma',['download'=>'pdf','id_detalle_proforma'=> $p->id_detalle_proforma,'codigo_moneda' => 'BS' ]) !!}">Bs</a></li>
-                                                        <li role="separator" class="divider"></li>
-                                                        <li><a href="{!! route('pdfproforma',['download'=>'pdf','id_detalle_proforma'=> $p->id_detalle_proforma,'codigo_moneda' => 'USD' ]) !!}">$US</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        <!-- dropdown -->
-                                        <!--<a  id="descargar" name="descargar" href="{!! route('pdfproforma',['download'=>'pdf','id_detalle_proforma'=> $p->id_detalle_proforma ]) !!}"  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> </a> -->
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-					    </div>
-                    </div>
-				</div>
-			</div>
-            <!-- end form cliente -->
+           
 			<!-- inicio productos -->
-			<div class="col-sm-7" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row-fluid"> 
-                            <div class="span6"> 
-                            </div> 
-                            <div class="span6 pull-right" style="text-align:right"> 
-                                <select  onchange="ftipo_precio();" id="tipo_precio" name="tipo_precio" class="btn-sm btn-primary " searchable="Search" aria-haspopup="true" aria-expanded="false">
-                                <option class="btn btn-sm bottom-primary" value="">Tipo Precio</option>
-                                
-                                @if ($rol=='admin')
-                                        <option class="btn btn-sm bottom-primary" value="mayor">Precio por mayor</option>
-                                        <option class="btn btn-sm bottom-primary" value="menor">Precio por menor</option>
-                                    @endif
-                                    @if ($rol=='vendedor')
-                                        <option class="btn btn-sm bottom-primary" value="menor">Precio por menor</option>
-                                    @endif
-                                </select>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
+			<div class="col-sm-10" >
+                
                 <br>
                 <div class="row">
                     <div class="col-md-12">
@@ -138,12 +41,7 @@
                                     <th>Marca</th>
                                     <th>Categoria</th>
                                     <th>Almacen</th>
-                                    <th class="menorc">Precio</th>
-                                    <th class="mayorc">Precio</th>
-                                    <th>Moneda</th>
-                                    <th>Cantidad</th>
-                                    <th hidden="true">
-                                    </th>
+                                    
                                 </tr>
                             </thead>
                             <tbody id="tbodyid">
@@ -159,15 +57,6 @@
                                     <td>{{$p->nombre_marca}}</td>
                                     <td>{{$p->nombre_categoria}}</td>
                                     <td>{{$p->nombre_almacen}}</td>
-                                    <td class="menorc">
-                                        <input id="{{'pre_'.$p->id_producto}}" class="form-control menor" placeholder="Precio unitario" value="  {{$p->precio_venta}}" name="{{'pre_'.$p->id_producto}}">
-                                    </td>
-                                    <td class="mayorc">
-                                        <input id="{{'prema_'.$p->id_producto}}" class="form-control mayor"  placeholder="Precio x mayor" value="  {{$p->precio_mayor}}" name="{{'prema_'.$p->id_producto}}">
-                                    </td>
-                                    <td>{{$p->codigo_moneda}}</td>
-                                    <td><input class="form-control" type="number" min="1" max="{{$p->stock}}" id="{{'cant_'.$p->id_producto}}" placeholder="Cantidad" value="1" name="{{'cant_'.$p->id_producto}}"></td>
-                                    <td hidden="true"> <input  type="checkbox" id="{{'check_'.$p->id_producto}}" name="{{'check_'.$p->id_producto}}" onclick="Select({{$p->id_producto}},{{$p->stock}})"> </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -182,7 +71,6 @@
 </div>
 <script src="{{URL::asset('visita/js/jquery.min.js')}}"></script>
 <script >
-    ftipo_precio();
     const proformas = {!! json_encode($proforma) !!};
     function chekar(id,stock){
         var dato1='check_'+id;
@@ -285,7 +173,6 @@
         document.getElementById('direccion_cliente').value='';
     }
     function ftipo_precio(){
-      
         $('.menor').attr('readonly', false);
         $('.mayor').attr('readonly', false);
         $('.menorc').hide();

@@ -25,7 +25,7 @@
 
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('login') }}">Login</a>
+        <a class="nav-link" href="{{ route('login') }}">Cerrar sesion</a>
       </li>
     </ul>
   </div>

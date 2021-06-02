@@ -87,9 +87,9 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="#">Productos</a></li>
-                <li><a href="#">Quienes somos</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li class="active"><a href="{{ route('producto_index') }}">Productos</a></li>
+                <li><a href="{{ route('quienesomos_index') }}">Quienes somos</a></li>
+                <li><a href="{{ route('contacto_index') }}">Contacto</a></li>
             </ul>
             <!-- /NAV -->
         </div>
