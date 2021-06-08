@@ -14,7 +14,6 @@ class ProformaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-
     }
 
     /**
@@ -37,6 +36,7 @@ class ProformaController extends Controller
                                 cat.nombre_categoria,
                                 --m.nombre_modelo,
                                 mar.nombre_marca,
+                                p.descripcion,
                                 p.precio_venta,
                                 mon.codigo_moneda,
                                 1::integer cantidad_compra,

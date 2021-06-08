@@ -8,16 +8,18 @@
         <!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
         <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href="visita/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="{{URL::asset('visita/css/bootstrap.min.css')}}"/>
+        <!-- css para slider -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <!-- Slick -->
-        <link type="text/css" rel="stylesheet" href="visita/css/slick.css"/>
-        <link type="text/css" rel="stylesheet" href="visita/css/slick-theme.css"/>
+        <link type="text/css" rel="stylesheet"  href="{{URL::asset('visita/css/slick.css')}}"/>
+        <link type="text/css" rel="stylesheet" href="{{URL::asset('visita/css/slick-theme.css')}}"/>
         <!-- nouislider -->
-        <link type="text/css" rel="stylesheet" href="visita/css/nouislider.min.css"/>
+        <link type="text/css" rel="stylesheet" href="{{URL::asset('visita/css/nouislider.min.css')}}"/>
         <!-- Font Awesome Icon -->
-        <link rel="stylesheet" href="visita/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{URL::asset('visita/css/font-awesome.min.css')}}">
         <!-- Custom stlylesheet -->
-        <link type="text/css" rel="stylesheet" href="visita/css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="{{URL::asset('visita/css/style.css')}}"/>
         <!--maps-->
         <style>
          #mimapa {height: 600px;}

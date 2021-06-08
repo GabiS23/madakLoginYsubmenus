@@ -1,21 +1,5 @@
-  <!--Import jQuery before export.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<!--Data Table-->
-<script type="text/javascript"  src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript"  src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
-<!--Export table buttons-->
-<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js" ></script>
-<script type="text/javascript"  src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
-<!--Export table button CSS-->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
 @extends('principal.admin.layout_admin')
 @section('content')
-<!-- datatable --> 
-
 <br><br>
 <div class="">
 	<form method="POST" id="form1" name="form1" action="{{ route('guardar_proforma') }}" enctype="multipart/form-data">
@@ -33,8 +17,8 @@
                                         <h3>Datos del cliente</h3> 
                                     </div> 
                                     <div class="span6 pull-right"> 
-                                        <a href="javascript:;" onclick="guardar();" class="d-none btn btn-sm btn-primary shadow-sm"><i class="fas fa-save"></i> Generar proforma</a>
-                                        <a href="javascript:;"  onclick ="document.getElementById('form1').reset();" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-eraser"></i> Limpiar</a>
+                                        <a href="javascript:;" onclick="guardar();" class="d-none btn btn-sm btn-primary shadow-sm"><i class="fa fa-save"></i> Generar proforma</a>
+                                        <a href="javascript:;"  onclick ="document.getElementById('form1').reset();" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fa fa-eraser"></i> Limpiar</a>
                                     </div> 
                                 </div>
                             </div>
@@ -134,8 +118,9 @@
                                     <th>Nro</th>
                                     <th>Codigo</th>
                                     <th>Stock</th>
-                                    <th>Detalle</th>
+                                    <th>Producto</th>
                                     <th>Marca</th>
+                                    <th>Descripcion</th>
                                     <th>Categoria</th>
                                     <th>Almacen</th>
                                     <th class="menorc">Precio</th>
@@ -157,6 +142,7 @@
                                     <td>{{$p->stock}}</td>
                                     <td>{{$p->nombre_producto}}</td>
                                     <td>{{$p->nombre_marca}}</td>
+                                    <td>{{$p->descripcion}}</td>
                                     <td>{{$p->nombre_categoria}}</td>
                                     <td>{{$p->nombre_almacen}}</td>
                                     <td class="menorc">
@@ -180,7 +166,7 @@
 	</form>
 
 </div>
-<script src="{{URL::asset('visita/js/jquery.min.js')}}"></script>
+
 <script >
     ftipo_precio();
     const proformas = {!! json_encode($proforma) !!};

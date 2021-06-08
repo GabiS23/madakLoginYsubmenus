@@ -150,7 +150,6 @@ body {
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Iniciar sesion</h5>
-            
             <form class="form-signin" method="POST" action="{{ route('iniciar_sesion') }}">
               <?php if($error=='si'){  ?>
                 <div class="alert alert-danger" role="alert" >
@@ -158,21 +157,20 @@ body {
                  </div>
               <?php }  ?>
               @csrf
-              <div class="form-label-group">
-                <input placeholder="Email address" type="email" id="email" name="email" class="form-control"  required autofocus>
+              <div>
+                <input style="height:45px; border-radius:10px;" placeholder="Email address" type="email" id="email" name="email" class="form-control">
               </div>
-
-              <div class="form-label-group">
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+<br>
+              <div>
+                <input style="height:45px; border-radius:10px;" type="password" id="password" name="password" class="form-control" placeholder="Password">
               </div>
 
               <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Recordarme</label>
               </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" href="{{ url('inicioAdmin_index') }}">Aceptar</button>
               <hr class="my-4">
-              <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit" href="{{ url('inicio_index') }}"><i class="fas fa-reply "></i>&nbsp;&nbsp;Atras</button>
+              <a class="btn btn-lg btn-danger btn-block text-uppercase" href="{{ url('inicio_index') }}"><i class="fas fa-reply "></i>&nbsp;&nbsp;Atras</a>
             </form>
           </div>
         </div>
