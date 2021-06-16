@@ -1,100 +1,271 @@
-  <!--Import jQuery before export.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<!--Data Table-->
-<script type="text/javascript"  src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript"  src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
-<!--Export table buttons-->
-<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js" ></script>
-<script type="text/javascript"  src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
-<!--Export table button CSS-->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
 @extends('principal.admin.layout_admin')
 @section('content')
 <br><br>
-<form method="POST" id="editar_producto" name="editar_producto" enctype="multipart/form-data">
-    {{ csrf_field() }}
+<form method="POST" id="editar_producto" name="editar_producto" action="{{ route('editar_producto',$id_producto) }}" enctype="multipart/form-data">
+    {{ csrf_field()}}
+    <input type="hidden" id="id_producto" name="id_producto">
     <div class="row">
         <div class="col-md-2"></div>
         <!-- inicio formulario -->
         <div class="col-sm-8" >
-        <h2>Editar producto</h2>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="row-fluid">     
+                                    <div class="span6 pull-left"> 
+                                        <h3>Editar producto</h3> 
+                                    </div> 
+                                    <div class="span6 pull-right"> 
+                                        <a class="btn btn-sm btn-danger btn-block" href="{{ url('producto_index') }}"><i class="fa fa-reply "></i>&nbsp;&nbsp;Atras</a>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+            <?php for($i = 0; $i < count($lista_errores); $i++){ ?>
+                <div class="alert alert-danger" role="alert" >
+                   <?php echo($lista_errores[$i]); ?>
+                </div>
+            <?php } ?>
+            <?php if($validacion_correcta==1){ ?>
+                <div class="alert alert-success" role="alert" >
+                   Registrado correctamente
+                </div>
+            <?php } ?>
+            <br>
             <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Codigo</label>
-                        <input type="text" class="form-control" id="codigo" placeholder="Codigo de producto">
+                <div class="row">
+                    <!-- gestion -->
+                    <div class="form-group col-md-4">
+                        <!-- <label for="inputState">Gestion</label> -->
+                        <label>Gestion</label>
+                        <select id="id_gestion" name="id_gestion" class="form-control">
+                            <option value="0">Elegir</option>
+                            @foreach($lista_gestion as $g)
+                                @if($id_gestion >= $g->id_gestion)
+                                    <option value="{{$g->id_gestion}}" selected>{{$g->nombre_gestion}}</option>
+                                @else
+                                    <option value="{{$g->id_gestion}}">{{$g->nombre_gestion}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="form-group col-md-6">
+                     <!-- cantidad -->
+                     <div class="form-group col-md-4">
                         <label>Cantidad</label>
-                        <input type="numb" class="form-control" id="cantidad" placeholder="Cantidad">
+                        <input type="numb" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" value="{{$cantidad}}">
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Nombre de producto</label>
-                        <input type="numb" class="form-control" id="cantidad" placeholder="Modelo">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputState">Marca</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Elegir</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Detalle</label>
-                        <input type="numb" class="form-control" id="cantidad" placeholder="Detalle">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputState">Categoria</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Elegir</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <!-- departamento -->
+                    <div class="form-group col-md-4">
                         <label for="inputState">Departamento</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Elegir</option>
-                            <option>...</option>
+                        <select id="id_departamento" name="id_departamento" class="form-control" onchange="cargar_sucursal();">
+                            <option value="0">Elegir</option>
+                            @foreach($lista_departamento as $d)
+                                @if($id_departamento >= $d->id_departamento)
+                                    <option value="{{$d->id_departamento}}" selected>{{$d->nombre_departamento}}</option>
+                                @else
+                                    <option value="{{$d->id_departamento}}">{{$d->nombre_departamento}}</option>
+                                @endif
+                            @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                   
+                </div>
+                <div class="row">
+                    <!-- categoria -->
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Categoria</label>
+                        <select id="id_categoria" name="id_categoria" class="form-control">
+                            <option value="0">Elegir</option>
+                            @foreach($lista_categoria as $c)
+                                @if($id_categoria >= $c->id_categoria)
+                                    <option value="{{$c->id_categoria}}" selected>{{$c->nombre_categoria}}</option>
+                                @else
+                                    <option value="{{$c->id_categoria}}">{{$c->nombre_categoria}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <!-- tipo de moneda -->
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Tipo de moneda</label>
+                        <select id="id_moneda" name="id_moneda" class="form-control">
+                            <option value="0">Elegir</option>
+                            @foreach($lista_moneda as $mo)
+                                @if($id_moneda >= $mo->id_moneda)
+                                    <option value="{{$mo->id_moneda}}" selected>{{$mo->codigo_moneda}}</option>
+                                @else
+                                    <option value="{{$mo->id_moneda}}">{{$mo->codigo_moneda}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <!-- sucursal -->
+                    <div class="form-group col-md-4">
                         <label for="inputState">Sucursal</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Elegir</option>
-                            <option>...</option>
+                        <select id="id_sucursal" name="id_sucursal" class="form-control" onchange="cargar_almacen();">
+                            <option value="0">Elegir</option>
+                            @foreach($lista_sucursal as $s)
+                                @if($id_sucursal >= $s->id_sucursal)
+                                    <option value="{{$s->id_sucursal}}" selected>{{$s->nombre_sucursal}}</option>
+                                @else
+                                <option value="{{$s->id_sucursal}}">{{$s->nombre_sucursal}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>              
+                </div>
+                <div class="row">
+                    <!-- nombre -->
+                    <div class="form-group col-md-4">
+                        <label>Nombre de producto</label>
+                        <input type="numb" class="form-control" id="nombre_producto" name="nombre_producto" placeholder="Modelo" value="{{$nombre_producto}}">
+                    </div>
+                    <!-- mayor -->
+                    <div class="form-group col-md-4">
+                        <label>Precio de venta por mayor</label>
+                        <input type="numb" class="form-control" id="precio_mayor" name="precio_mayor" placeholder="Precio venta por mayor" value={{$precio_mayor}}>
+                    </div>
+                     <!-- almacen -->
+                     <div class="form-group col-md-4">
+                        <label for="inputState">Almacen</label>
+                        <select id="id_almacen" name="id_almacen" class="form-control">
+                            <option value="0">Elegir</option>
+                            @foreach($lista_almacen as $a)
+                                @if($id_almacen >= $a->id_almacen)
+                                    <option value="{{$a->id_almacen}}" selected>{{$a->nombre_almacen}}</option>
+                                @else
+                                    <option value="{{$a->id_almacen}}">{{$a->nombre_almacen}}</option>
+                                @endif
+                            @endforeach
                         </select>
                     </div>
+                    
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Imagen de producto</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                <div class="row">
+                    <!-- marca -->
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Marca</label>
+                        <select id="id_marca" name="id_marca" class="form-control">
+                            <option value="0">Elegir</option>
+                            @foreach($lista_marca as $m)
+                                @if($id_marca >= $m->id_marca)
+                                    <option value="{{$m->id_marca}}" selected>{{$m->nombre_marca}}</option>
+                                @else
+                                    <option value="{{$m->id_marca}}">{{$m->nombre_marca}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                     <!-- venta por menor -->
+                     <div class="form-group col-md-4">
+                        <label>Precio de venta por menor</label>
+                        <input type="numb" class="form-control" id="precio_venta" name="precio_venta" placeholder="Precio venta por menor"value="{{$precio_venta}}" >
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <!-- codigo -->
+                    <div class="form-group col-md-4">
+                        <label>Codigo</label>
+                        <input type="text" class="form-control" id="codigo_producto" name="codigo_producto" placeholder="Codigo de producto" value="{{$codigo_producto}}">
+                    </div>
+                    <!-- descripcion -->
+                    <div class="form-group col-md-4">
+                        <label>Descripcion</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Descripcion" value="{{$descripcion}}">{{$descripcion}}</textarea>
                     </div>
                 </div>
-                
-               
-            </div>
-                <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="submit" class="btn btn-danger">Cancelar</button>
+                <div class="row">
+                    <!-- ficha tecnica -->
+                    <div class="col-md-6">
+                        <label for="exampleFormControlFile1">Ficha tecnica</label>
+                        <textarea class="ckeditor form-control" name="ficha_tecnica" id="ficha_tecnica" value="{{$ficha_tecnica}}">{{$ficha_tecnica}}</textarea>
+                    </div>
+                    <!-- accesorios -->
+                    <div class="col-md-6">
+                        <label for="exampleFormControlFile1">Accesorios</label>
+                        <textarea class="ckeditor form-control" name="accesorios" id="accesorios"value="{{$accesorios}}">{{$accesorios}}</textarea>
+                    </div> 
+                    
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a href="{{ route('producto_index') }}" class="d-none btn btn-sm btn-danger">Cancelar</a>
+                        <!-- <button type="submit" class="btn btn-danger">Cancelar</button> -->
+                    </div>
                 </div>
             </form>
-        </div>
+        </div> 
         <!-- fin formulario -->
         <div class="col-md-2"></div>
     </div>
 </form>
-<script src="{{URL::asset('visita/js/jquery.min.js')}}"></script>
+<script>
+cargar_sucursal();
+cargar_almacen();
+function cargar_sucursal() {
+    //console.log(document.getElementById('id_departamento').value);
+    //como recupera imputs en js
+    var param={id_departamento:document.getElementById('id_departamento').value};
+    var url="{{route('cargar_sucursal')}}";
+    $.ajax({   
+            type: "post",
+            url:url,
+            //envia parametros
+            data:{dato: param },
+            headers: {
+                'X-CSRF-TOKEN': '{{csrf_token()}}'
+            },
+            success: function(rcdata){ 
+                //recibe parametros
+                var v_id_sucursal='{{$id_sucursal}}';
+                $("#id_sucursal").empty().append('<option value="0">Elegir</option>');
+                for (var i = 0; i < rcdata["lista_sucursal"].length; i++) {
+                    var id=rcdata["lista_sucursal"][i].id_sucursal;
+                    var nombre=rcdata["lista_sucursal"][i].nombre_sucursal;
+                    
+                    if(v_id_sucursal==id){
+                        $("#id_sucursal").append('<option value="'+id+'" selected onchange="cargar_almacen();">'+nombre+'</option>');
+                    }else{
+                        $("#id_sucursal").append('<option value="'+id+'"  onchange="cargar_almacen();">'+nombre+'</option>'); 
+                    }
+                    
+                }
+            }
+            });
+}
+function cargar_almacen(){
+    var v_id_almacen='{{$id_almacen}}';
+    var param={id_sucursal:document.getElementById('id_sucursal').value};
+    var url="{{route('cargar_almacen')}}";
+    $.ajax({   
+            type: "post",
+            url:url,
+            //envia parametros
+            data:{dato: param },
+            headers: {
+                'X-CSRF-TOKEN': '{{csrf_token()}}'
+            },
+            success: function(rcdata){ 
+                //recibe parametros
+                console.log('almacenes',rcdata["lista_almacen"]);
+                
+                $("#id_almacen").empty().append('<option value="0">Elegir</option>');
+                for (var i = 0; i < rcdata["lista_almacen"].length; i++) {
 
+                    
+                    var id=rcdata["lista_almacen"][i].id_almacen;
+                    var nombre=rcdata["lista_almacen"][i].nombre_almacen;
+                    if(v_id_almacen==id){
+                        $("#id_almacen").append('<option value="'+id+'" selected>'+nombre+'</option>');
+                    }else{
+                        $("#id_almacen").append('<option value="'+id+'">'+nombre+'</option>');
+                    }
+                    
+                }
+                
+            }
+            });
+}
+</script> 
 @stop

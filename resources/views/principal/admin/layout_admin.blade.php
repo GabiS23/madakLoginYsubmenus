@@ -30,7 +30,9 @@
         <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         <!-- ckeditor -->
         <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-
+        <!-- select 2 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     @include('principal.admin.header')

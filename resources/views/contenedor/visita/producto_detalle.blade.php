@@ -107,7 +107,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <!-- slider inicio -->
-                  <div id="myCarousel" class="carousel slide" data-ride="carousel"  style="height:400px; width:400px;" >
+                  <div id="myCarousel" class="carousel slide" data-ride="carousel"  style="height:500px; width:500px; object-fit:cover;" >
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -123,12 +123,12 @@
                           <?php if($contador==1){ ?>
                             <div class="item active">
                               <!-- <div class="item"> -->
-                              <img src="{{URL::asset('imagenes/productos/'.$ip->foto)}}" style="height:100%; width:100%;" alt="Yamaha">
+                              <img src="{{URL::asset('imagenes/productos/'.$ip->foto)}}" style="height:100%; width:100%; object-fit:cover;" alt="Yamaha">
                             </div>
                           <?php }else{ ?>
                             <!-- <div class="item active"> -->
                             <div class="item">
-                              <img src="{{URL::asset('imagenes/productos/'.$ip->foto)}}" style="height:100%; width:100%;" alt="Yamaha">
+                              <img src="{{URL::asset('imagenes/productos/'.$ip->foto)}}" style="height:100%; width:100%; object-fit:cover;" alt="Yamaha">
                             </div>
                           <?php } ?>
                         @endforeach
@@ -154,8 +154,6 @@
                       @endforeach
                     </div>
                   </div>
-
-                                
                 </div>
                 <div class="tab-pane" id="tab_default_2">
                                 @foreach($lista_producto as $p)

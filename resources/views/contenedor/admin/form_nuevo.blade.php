@@ -7,6 +7,18 @@
         <div class="col-md-2"></div>
         <!-- inicio formulario -->
         <div class="col-sm-8" >
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="row-fluid">     
+                        <div class="span6 pull-left"> 
+                            <h3>Nuevo producto</h3> 
+                        </div> 
+                        <div class="span6 pull-right"> 
+                            <a class="btn btn-sm btn-danger btn-block" href="{{ url('producto_index') }}"><i class="fa fa-reply "></i>&nbsp;&nbsp;Atras</a>
+                        </div> 
+                    </div>
+                </div>
+            </div>
             <?php for($i = 0; $i < count($lista_errores); $i++){ ?>
                 <div class="alert alert-danger" role="alert" >
                    <?php echo($lista_errores[$i]); ?>
@@ -17,7 +29,7 @@
                    Registrado correctamente
                 </div>
             <?php } ?>
-        <h2>Nuevo Producto</h2>
+            <br>
             <form>
                 <div class="row">
                     <!-- gestion -->
@@ -105,12 +117,12 @@
                         <label>Nombre de producto</label>
                         <input type="numb" class="form-control" id="nombre_producto" name="nombre_producto" placeholder="Modelo"value="{{$nombre_producto}}">
                     </div>
-                    <!-- precio de compra -->
+                    <!-- mayor -->
                     <div class="form-group col-md-4">
-                        <label>Precio de compra</label>
-                        <input type="numb" class="form-control" id="precio_compra" name="precio_compra" placeholder="Precio compra" value="{{$precio_compra}}">
+                        <label>Precio de venta por mayor</label>
+                        <input type="numb" class="form-control" id="precio_mayor" name="precio_mayor" placeholder="Precio venta por mayor" value="{{$precio_mayor}}">
                     </div>
-                     <!-- almacen -->
+                    <!-- almacen -->
                      <div class="form-group col-md-4">
                         <label for="inputState">Almacen</label>
                         <select id="id_almacen" name="id_almacen" class="form-control">
@@ -141,10 +153,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <!-- mayor -->
+                    <!-- venta por menor -->
                     <div class="form-group col-md-4">
-                        <label>Precio de venta por mayor</label>
-                        <input type="numb" class="form-control" id="precio_mayor" name="precio_mayor" placeholder="Precio venta por mayor" value="{{$precio_mayor}}">
+                        <label>Precio de venta por menor</label>
+                        <input type="numb" class="form-control" id="precio_venta" name="precio_venta" placeholder="Precio venta por menor" value="{{$precio_venta}}">
                     </div>
                     
                 </div>
@@ -154,15 +166,7 @@
                         <label>Codigo</label>
                         <input type="text" class="form-control" id="codigo_producto" name="codigo_producto" placeholder="Codigo de producto" value="{{$codigo_producto}}">
                     </div>
-                     <!-- venta por menor -->
-                     <div class="form-group col-md-4">
-                        <label>Precio de venta por menor</label>
-                        <input type="numb" class="form-control" id="precio_venta" name="precio_venta" placeholder="Precio venta por menor" value="{{$precio_venta}}">
-                    </div>
-                    
-                </div>
-                <div class="row">
-                    <!-- descripcion -->
+                     <!-- descripcion -->
                     <div class="form-group col-md-4">
                         <label>Descripcion</label>
                         <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Descripcion">{{$descripcion}}</textarea>
@@ -170,10 +174,16 @@
                     
                 </div>
                 <div class="row">
+                    
+                    
+                </div>
+                <div class="row">
+                    <!-- ficha tecnica -->
                     <div class="col-md-6">
                         <label for="exampleFormControlFile1">Ficha tecnica</label>
                         <textarea class="ckeditor form-control" name="ficha_tecnica" id="ficha_tecnica"></textarea>
                     </div>
+                    <!-- accesorios -->
                     <div class="col-md-6">
                         <label for="exampleFormControlFile1">Accesorios</label>
                         <textarea class="ckeditor form-control" name="accesorios" id="accesorios"></textarea>

@@ -29,7 +29,7 @@
 					<div class="col-md-3">
 						<div class="product">
 							<div class="product-img">
-								<img src="{{URL::asset('imagenes/productos/'.($p->foto!='' ?$p->foto:'default_producto.jpg'))}}" style="height:250px; width:262px;" alt="">
+								<img src="{{URL::asset('imagenes/productos/'.($p->foto!='' ?$p->foto:'default_producto.jpg'))}}" style="height:250px; width:262px;object-fit:cover;" alt="">
 								<div class="product-label">
 									<!-- <span class="sale">-30%</span> -->
 									<span class="new">Nuevo</span>

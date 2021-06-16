@@ -66,9 +66,9 @@
                                                     <i class="fa fa-print fa-sm"></i>
                                                     </a>
                                                     <ul class="dropdown-menu" style="background:white;">
-                                                        <li><a href="{!! route('pdfproforma',['download'=>'pdf','id_detalle_proforma'=> $p->id_detalle_proforma,'codigo_moneda' => 'BS' ]) !!}">Bs</a></li>
+                                                        <li><a target="_blank" href="{!! route('pdfproforma',['download'=>'pdf','id_detalle_proforma'=> $p->id_detalle_proforma,'codigo_moneda' => 'BS' ]) !!}">Bs</a></li>
                                                         <li role="separator" class="divider"></li>
-                                                        <li><a href="{!! route('pdfproforma',['download'=>'pdf','id_detalle_proforma'=> $p->id_detalle_proforma,'codigo_moneda' => 'USD' ]) !!}">$US</a></li>
+                                                        <li><a target="_blank" href="{!! route('pdfproforma',['download'=>'pdf','id_detalle_proforma'=> $p->id_detalle_proforma,'codigo_moneda' => 'USD' ]) !!}">$US</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>

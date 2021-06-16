@@ -43,7 +43,9 @@ Route::post("/cliente_busqueda", [ProformaController::class, "cliente_busqueda"]
 
 Route::get("/producto_index", [ProductoController::class, "producto_index"])->name('producto_index');
 Route::get("/form_nuevo", [ProductoController::class, "form_nuevo"])->name('form_nuevo');
-Route::get("/form_editar", [ProductoController::class, "form_editar"])->name('form_editar');
+Route::get("/form_editar/{id}", [ProductoController::class, "form_editar"])->name('form_editar');
+Route::post("/editar_producto", [ProductoController::class, "editar_producto"])->name('editar_producto');
+
 Route::post("/nuevo_producto", [ProductoController::class, "nuevo_producto"])->name('nuevo_producto');
 Route::post("/cargar_sucursal", [ProductoController::class, "cargar_sucursal"])->name('cargar_sucursal');
 Route::post("/cargar_almacen", [ProductoController::class, "cargar_almacen"])->name('cargar_almacen');
@@ -53,3 +55,11 @@ Route::get("/producto_detalle/{id}", [VisitaController::class, "producto_detalle
 Route::get("/imagen_producto/{id}", [ProductoController::class, "imagen_producto"])->name('imagen_producto');
 
 Route::post("/nuevo_imagen_producto", [ProductoController::class, "nuevo_imagen_producto"])->name('nuevo_imagen_producto');
+Route::get("/form_nuevo_usuario", [AdminController::class, "form_nuevo_usuario"])->name('form_nuevo_usuario');
+Route::post("/guardar_usuario", [AdminController::class, "guardar_usuario"])->name('guardar_usuario');
+
+Route::post("/eliminar_usuario", [AdminController::class, "eliminar_usuario"])->name('eliminar_usuario');
+Route::get("/form_editar_usuario/{id}", [AdminController::class, "form_editar_usuario"])->name('form_editar_usuario');
+Route::post("/editar_usuario", [AdminController::class, "editar_usuario"])->name('editar_usuario');
+
+Route::post("/eliminar_imagen", [ProductoController::class, "eliminar_imagen"])->name('eliminar_imagen');
